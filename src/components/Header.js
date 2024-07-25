@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../assets/logo-BakIU_7T.png";
+import { Link } from "react-router-dom";
+import LoginModal from "../LoginModal";
+import SignUp from "../SignUp";
 
 const Header = () => {
+  const [isModelOpen, setIsModelOpen] = useState(false);
+  const [isSignUpModelOpen, setSignUpIsModelOpen] = useState(false);
+
+  const handleLogin = () => {
+    setIsModelOpen(true);
+  };
+  const handleSignUp = () => {
+    setSignUpIsModelOpen(true);
+  };
   return (
     <>
       <header className="py-4">
@@ -51,15 +63,23 @@ const Header = () => {
             </a>
           </nav>
           <div>
-            <button className="bg-primary-text px-4 py-2 rounded mr-2">
+            <button
+              onClick={handleLogin}
+              className="bg-primary-text px-4 py-2 rounded mr-2 text-primary-bg"
+            >
               Login
             </button>
-            <button className="bg-primary-text px-4 py-2 rounded">
+            <button
+              onClick={handleSignUp}
+              className="bg-primary-text px-4 py-2 rounded text-primary-bg"
+            >
               Signup
             </button>
           </div>
         </div>
       </header>
+      <LoginModal isOpen={isModelOpen} onClose={setIsModelOpen} />
+      <SignUp isOpen={isSignUpModelOpen} onClose={setSignUpIsModelOpen} />
     </>
   );
 };
